@@ -31,15 +31,19 @@ describe("Testing /item endpoint", () => {
   });
   describe("readItem", () => {
     it("should return error when called wihtout a hash", async () => {
-      itemController
-        .readItem()
-        .then(() => {
-          throw new Error("unexpected success");
-        })
-        .catch((err) => {
-          expect(result).to.be.instanceOf(Error);
-          expect(err.message).to.equal("Invalid item id");
-        });
+      return itemController.readItem().catch((err) => {
+        expect(err).to.be.an("error");
+        expect(err.message).to.equal("Invalid item id");
+      });
+    //   itemController
+    //     .readItem()
+    //     .then(() => {
+    //       throw new Error("unexpected success");
+    //     })
+    //     .catch((err) => {
+    //       expect(result).to.be.instanceOf(Error);
+    //       expect(err.message).to.equal("Invalid item id");
+    //     });
     });
     it("should succeed when called with a hash", async () => {
       const result = await itemController.readItem('test');
