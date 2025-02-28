@@ -35,19 +35,34 @@ describe("Testing /item endpoint", () => {
         expect(err).to.be.an("error");
         expect(err.message).to.equal("Invalid item id");
       });
-    //   itemController
-    //     .readItem()
-    //     .then(() => {
-    //       throw new Error("unexpected success");
-    //     })
-    //     .catch((err) => {
-    //       expect(result).to.be.instanceOf(Error);
-    //       expect(err.message).to.equal("Invalid item id");
-    //     });
+      //   itemController
+      //     .readItem()
+      //     .then(() => {
+      //       throw new Error("unexpected success");
+      //     })
+      //     .catch((err) => {
+      //       expect(result).to.be.instanceOf(Error);
+      //       expect(err.message).to.equal("Invalid item id");
+      //     });
     });
     it("should succeed when called with a hash", async () => {
-      const result = await itemController.readItem('test');
+      const result = await itemController.readItem("test");
       expect(result).to.equal(itemMock);
     });
+  });
+
+  describe("createItem", () => {
+    let itemModelStub, saveStub, result;
+
+    beforeEach(async () => {
+      saveStub = sandbox.stub().returns(itemMock);
+      itemModelStub = sandbox.stub().returns({
+        save: saveStub,
+      });
+
+      itemController.__set__("Item", itemModelStub);
+    });
+
+
   });
 });
