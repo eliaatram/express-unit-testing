@@ -63,6 +63,24 @@ describe("Testing /item endpoint", () => {
       itemController.__set__("Item", itemModelStub);
     });
 
+    it("should throw invalid argument error", () => {
+      itemController
+        .createItem()
+        .then(() => {
+          throw new Error("⚠️ Unexpected success!");
+        })
+        .catch((err) => {
+          expect(result).to.be.instanceOf(Error);
+          expect(err.message).to.equal("Invalid arguments");
+        });
+    });
 
+    it("should create item successfully", async () => {
+      result = await itemController.createItem(itemMock);
+      expect(itemModelStub).to.have.been.calledWithNew;
+      expect(itemModelStub).to.have.been.calledWith(itemMock);
+      expect(saveStub).to.have.been.called;
+      expect(result).to.equal(itemMock);
+    });
   });
 });
