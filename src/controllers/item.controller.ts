@@ -1,9 +1,8 @@
-const Item = require('../models/Item.model');
-const {
-  nanoid
-} = require('nanoid');
+import { IItem } from 'src/interfaces/item.interface';
+import Item from '../models/Item.model';
+import { nanoid } from 'nanoid'
 
-exports.createItem = async function (itemObj) {
+export const createItem = async function (itemObj: IItem) {
   try {
     if (!itemObj || !itemObj.name || !itemObj.rating || !itemObj.price || !itemObj.hash) {
       throw new Error('Invalid arguments');
@@ -28,8 +27,7 @@ exports.createItem = async function (itemObj) {
   }
 }
 
-exports.updateItemHash = async function (hash) {
-  console.log(hash)
+export const updateItemHash = async function (hash: string) {
   try {
     if (!hash) {
       throw new Error('Incomplete arguments');
@@ -46,7 +44,7 @@ exports.updateItemHash = async function (hash) {
   }
 }
 
-exports.readItem = async function (hash) {
+export const readItem = async function (hash: string) {
   try {
     if (!hash) {
       throw new Error('Invalid item id');
@@ -62,7 +60,7 @@ exports.readItem = async function (hash) {
 
 
 // Private function
-function getUniqueHash(item) {
+function getUniqueHash(item: IItem) {
   if (!item) return null;
   const currentHash = item.hash;
   let newHash = nanoid(10);

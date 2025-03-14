@@ -1,18 +1,18 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const itemSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   rating: {
     type: String,
-    required: true
+    required: true,
   },
   price: {
     type: Number,
-    required: true
+    required: true,
   },
   hash: {
     type: String,
@@ -20,7 +20,7 @@ const itemSchema = new Schema({
     unique: true,
     minlength: 10,
     maxlength: 10,
-  }
+  },
 });
 
-module.exports = mongoose.model('Item', itemSchema);
+export default mongoose.model('Item', itemSchema);

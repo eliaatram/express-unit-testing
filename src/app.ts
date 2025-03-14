@@ -1,12 +1,9 @@
-const express = require('express');
-const cors = require('cors');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-
-const {
-	itemRoutes,
-	healthCheckRoutes
-} = require('./routes');
+import express, { Request, Response } from 'express';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+import healthCheckRoutes from './routes/health.route';
+import itemRoutes from './routes/item.route';
 
 const app = express();
 
@@ -16,7 +13,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cors());
 
-app.get('/', (req, res) => {
+app.get('/', (_req: Request, res: Response) => {
 	res.json({
 		status: true
 	})
@@ -27,9 +24,8 @@ app.use('/item', itemRoutes);
 
 // Connect to mongoDB
 let mongoDB = process.env.MONGODB_URL || "mongodb://localhost:27017/express-api-unit-test-starter";
-// mongoose.connect(mongoDB, {
-// 	useNewUrlParser: true
-// });
+mongoose.connect(mongoDB, {
+});
 mongoose.Promise = global.Promise;
 
 mongoose.connection.on('error', console.error.bind(console, '❌❌❌ MongoDB Connection Error ❌❌❌'));

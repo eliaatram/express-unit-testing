@@ -26,7 +26,6 @@ describe("Item routes", () => {
         hash: "testHash12",
       };
 
-      console.log("testing the item routes")
       const response = await request(app)
         .post("/item")
         .send(newItem)

@@ -1,15 +1,16 @@
-const express = require("express");
-const router = express.Router();
+import express, { Request, Response, Router } from 'express';
+import { readItem, createItem, updateItemHash } from '../controllers/item.controller';
 
-const itemController = require('../controllers/item.controller');
+const router: Router = express.Router();
 
-router.get('/:hash', async (req, res) => {
+router.get('/:hash', async (req: Request, res: Response) => {
   try {
     const {
       hash
     } = req.params;
 
-    const item = await itemController.readItem(hash);
+    // const item = await readItem(hash);5
+    const item = await readItem(hash);
     res.json({
       item,
       status: 200,
@@ -24,7 +25,7 @@ router.get('/:hash', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', async (req: Request, res: Response) => {
   try {
     const {
       name,
@@ -33,7 +34,7 @@ router.post('/', async (req, res) => {
       hash
     } = req.body;
 
-    const item = await itemController.createItem({
+    const item = await createItem({
       name,
       rating,
       price,
@@ -54,14 +55,13 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/', async (req, res) => {
+router.put('/', async (req: Request, res: Response) => {
   try {
-    console.log(req.body)
     const {
       hash
     } = req.body;
 
-    const item = await itemController.updateItemHash(hash);
+    const item = await updateItemHash(hash);
     res.json({
       item,
       status: 200,
@@ -76,4 +76,4 @@ router.put('/', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

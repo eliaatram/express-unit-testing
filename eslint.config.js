@@ -2,7 +2,7 @@ import tseslint from 'typescript-eslint';
 
 export default tseslint.config([
   {
-    ignores: ['eslint.config.js', ],
+    ignores: ['eslint.config.js', 'dist/*'],
   },
   {
     plugins: {
