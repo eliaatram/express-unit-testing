@@ -27,9 +27,9 @@ app.use('/item', itemRoutes);
 
 // Connect to mongoDB
 let mongoDB = process.env.MONGODB_URL || "mongodb://localhost:27017/express-api-unit-test-starter";
-mongoose.connect(mongoDB, {
-	useNewUrlParser: true
-});
+// mongoose.connect(mongoDB, {
+// 	useNewUrlParser: true
+// });
 mongoose.Promise = global.Promise;
 
 mongoose.connection.on('error', console.error.bind(console, '❌❌❌ MongoDB Connection Error ❌❌❌'));

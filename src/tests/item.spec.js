@@ -83,4 +83,53 @@ describe("Testing /item endpoint", () => {
       expect(result).to.equal(itemMock);
     });
   });
+
+  describe("updateItem", () => {
+    let getUniqueHashStub, saveStub, result, updatedItemMock;
+    const updatedItemHash = "9876543219";
+
+    beforeEach(async () => {
+      // forcefully restore the sandbox to allow re-write of findOneStub
+      sandbox.restore();
+
+      // stub to mock getUniqueHash's functionality
+      getUniqueHashStub = sandbox.stub().returns(updatedItemHash);
+
+      updatedItemMock = {
+        ...itemMock,
+        hash: updatedItemHash,
+      };
+
+      saveStub = sandbox.stub().returns(updatedItemMock);
+
+      findOneStub = sandbox.stub(mongoose.Model, "findOne").resolves({
+        ...itemMock,
+        save: saveStub,
+      });
+
+      itemController.__set__("getUniqueHash", getUniqueHashStub);
+    });
+
+    it("should throw Incomplete arguments error", () => {
+      result = itemController
+        .updateItemHash()
+        .then(() => {
+          throw new Error("Unexcepted success");
+        })
+        .catch((err) => {
+          expect(result).to.be.instanceOf(Error);
+          expect(err.message).to.equal("Incomplete arguments");
+        });
+    });
+
+    it("should update item hash successfully", async () => {
+      result = await itemController.updateItemHash(hashMock);
+      expect(findOneStub).to.have.been.calledWith({
+        hash: hashMock,
+      });
+      expect(findOneStub).to.have.been.calledOnce;
+      expect(saveStub).to.have.been.calledOnce;
+      expect(result).to.equal(updatedItemMock)
+    });
+  });
 });

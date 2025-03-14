@@ -56,6 +56,7 @@ router.post('/', async (req, res) => {
 
 router.put('/', async (req, res) => {
   try {
+    console.log(req.body)
     const {
       hash
     } = req.body;

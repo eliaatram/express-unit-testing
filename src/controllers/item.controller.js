@@ -29,6 +29,7 @@ exports.createItem = async function (itemObj) {
 }
 
 exports.updateItemHash = async function (hash) {
+  console.log(hash)
   try {
     if (!hash) {
       throw new Error('Incomplete arguments');
