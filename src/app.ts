@@ -19,6 +19,12 @@ app.get('/', (_req: Request, res: Response) => {
 	})
 });
 
+app.get('/test', (_req: Request, res: Response) => {
+	res.json({
+		message: "hello"
+	})
+});
+
 app.use('/health', healthCheckRoutes);
 app.use('/item', itemRoutes);
 
