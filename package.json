@@ -4,7 +4,8 @@
   "description": "Boilerplate express + mongoose API with unit test setup (mocha, chai, supertest, rewire, sinon)",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node server.ts",
+    "start": "node ./dist/src/app.js",
+    "start:dev": "ts-node server.ts",
     "dev": "nodemon server.js",
     "test": "mocha --watch ./src/tests/*.spec.js",
     "build": "tsc -p .",
