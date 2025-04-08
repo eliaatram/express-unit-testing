@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
-import mongoose from 'mongoose';
+// import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import healthCheckRoutes from './routes/health.route';
 import itemRoutes from './routes/item.route';
@@ -23,11 +23,11 @@ app.use('/health', healthCheckRoutes);
 app.use('/item', itemRoutes);
 
 // Connect to mongoDB
-let mongoDB = process.env.MONGODB_URL || "mongodb://localhost:27017/express-api-unit-test-starter";
-mongoose.connect(mongoDB, {
-});
-mongoose.Promise = global.Promise;
+// let mongoDB = process.env.MONGODB_URL || "mongodb://localhost:27017/express-api-unit-test-starter";
+// mongoose.connect(mongoDB, {
+// });
+// mongoose.Promise = global.Promise;
 
-mongoose.connection.on('error', console.error.bind(console, '❌❌❌ MongoDB Connection Error ❌❌❌'));
+// mongoose.connection.on('error', console.error.bind(console, '❌❌❌ MongoDB Connection Error ❌❌❌'));
 
 module.exports = app;
